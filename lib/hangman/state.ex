@@ -4,7 +4,7 @@ defmodule Hangman.State do
     word = String.downcase(word)
     goal = word |> String.graphemes() |> MapSet.new
 
-    %{word: word, goal: goal, misses: Mapset.new(), matches: Mapset.new(), limit: 4, mask: "_", completed?: false}
+    %{word: word, goal: goal, misses: MapSet.new(), matches: MapSet.new(), limit: 4, mask: "_", completed?: false}
   end
 
 end

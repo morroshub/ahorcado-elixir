@@ -8,26 +8,15 @@ defmodule Hangman.Logic do
   """
 
   def guess(letter, state) do
-    %{word: word, matches: matches, misses: misses, limit: limit, completed?: completed?} = state
+    %{goal: goal,  matches: matches, misses: misses, limit: limit} = state
 
     # Verificar si ya hemos ganado o perdido
-    if completed? || limit == 0 do
-      IO.puts "Game already over"
-      state
+    if MapSet.member?(goal, letter) do
+     matches = MapSet.put(matches, letter)
+     completed? = MapSet.put(matches, letter)
+      %{state | matches: matches, completed?: completed?}
     else
-      # Verificar si la letra ya ha sido adivinada
-      if letter in matches || letter in misses do
-        IO.puts "Letter #{letter} already guessed"
-        state
-      else
-        if String.contains?(word, letter) do
-          matches = [letter | matches]
-          completed? = word |> String.graphemes() |> Enum.all?(&(&1 in matches))
-          %{state | matches: matches, completed?: completed?}
-        else
-          %{state | misses: [letter | misses], limit: limit - 1}
-        end
-      end
+      %{state | misses: MapSet.put(misses, letter), limit: limit - 1 }
     end
   end
 end
