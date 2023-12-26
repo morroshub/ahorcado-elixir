@@ -15,7 +15,7 @@ defmodule Hangman.Logic do
     # Verificar si ya hemos ganado o perdido
     if MapSet.member?(goal, letter) do
      matches = MapSet.put(matches, letter)
-     completed? = MapSet.put(matches, letter)
+     completed? = MapSet.size(matches) == MapSet.size(goal)
       %{state | matches: matches, completed?: completed?}
     else
       %{state | misses: MapSet.put(misses, letter), limit: limit - 1 }
