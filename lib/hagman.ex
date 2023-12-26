@@ -3,6 +3,8 @@ defmodule Hangman do
   alias Hangman.View
   alias Hangman.Logic
   alias Hangman.State
+  alias Hangman.Goal # Nuestro adaptador
+
 
   @moduledoc """
   Classic game for play with friends in party time.
@@ -28,9 +30,7 @@ defmodule Hangman do
 
   def start_game do
 
-    word = "elixir"
-
-    word
+    Goal.generate()
     |> State.new()
     |> View.format_response()
   end
