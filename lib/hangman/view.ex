@@ -2,25 +2,24 @@ defmodule Hangman.View do
   @moduledoc """
   Presentation layer of app Hangman
   """
+
+  alias Hangman.State
+
   @doc """
   Returns response
   """
 
-  def format_response(%{completed?: false} = state) do
+  def format_response(%State{limit: limit, completed?: false} = state) when limit > 0 do
     {mask_word(state), state}
   end
 
-  def format_response(%{word: word, matches: _matches} = state) do
-    if state.limit > 0 do
-      if state.completed? do
-        {"You won, word was: #{word}", state}
-      else
-        {"Please don't use repeated letters", state}
-      end
-    else
+  def format_response(%State{limit: limit, word: word} =state) when limit > 0 do
+    {"You won, word was: #{word}", state}
+  end
+
+  def format_response(%State{word: word} = state) do
       {"Game Over, word was: #{word}", state}
     end
-  end
 
 
   defp mask_word(%{matches: matches, word: word, mask: mask} = _state) do

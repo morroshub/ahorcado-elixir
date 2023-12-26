@@ -3,11 +3,13 @@ defmodule Hangman.Logic do
   Main logic of game
   """
 
+  alias Hangman.State
+
   @doc"""
   Return the game state after the user takes a guess
   """
 
-  def guess(letter, state) do
+  def guess(letter, %State{} = state) do
     %{goal: goal,  matches: matches, misses: misses, limit: limit} = state
 
     # Verificar si ya hemos ganado o perdido

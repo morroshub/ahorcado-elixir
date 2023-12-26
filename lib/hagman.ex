@@ -26,7 +26,7 @@ defmodule Hangman do
   """
 
 
-  def start_game  do
+  def start_game do
 
     word = "elixir"
 
@@ -41,7 +41,7 @@ defmodule Hangman do
   """
 
 
-  def take_guess(letter, %{limit: limit, completed?: false} = state) when limit > 0  do
+  def take_guess(letter, %State{limit: limit, completed?: false} = state) when limit > 0  do
     letter
     |> String.downcase()
     |> Logic.guess(state)
