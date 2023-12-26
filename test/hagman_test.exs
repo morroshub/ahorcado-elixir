@@ -1,5 +1,6 @@
-defmodule HagmanTest do
+defmodule HangmanTest do
   use ExUnit.Case
+  doctest Hangman
 
   describe "take_guess/2" do
     setup do

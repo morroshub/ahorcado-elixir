@@ -38,7 +38,17 @@ defmodule Hangman do
 
   @doc """
   Lets the user to take a guess
+
+
+  ## Examples
+
+    iex> {_word, state} = Hangman.start_game()
+    iex> Hangman.take_guess("x", state) |> elem(0)
+    "___x__"
+
+
   """
+
 
 
   def take_guess(letter, %State{limit: limit, completed?: false} = state) when limit > 0  do
