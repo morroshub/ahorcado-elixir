@@ -2,7 +2,7 @@ defmodule HangmanTest do
   use ExUnit.Case
   doctest Hangman
 
-  defmodule TestGenerator do
+  defmodule TestGenerator do # Este sera nuestro adaptador en tiempo de ejecucion | Config realizada tambien en "test_helper"
     @behaviour Hangman.Goal.Api
 
     def generate, do: "Elixir"

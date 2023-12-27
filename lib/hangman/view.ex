@@ -10,16 +10,16 @@ defmodule Hangman.View do
   """
 
   def format_response(%State{limit: limit, completed?: false} = state) when limit > 0 do
-    {mask_word(state), state}
+    mask_word(state)
   end
 
-  def format_response(%State{limit: limit, word: word} =state) when limit > 0 do
-    {"You won, word was: #{word}", state}
+  def format_response(%State{limit: limit, word: word} =_state) when limit > 0 do
+    "You won, word was: #{word}"
   end
 
-  def format_response(%State{word: word} = state) do
-      {"Game Over, word was: #{word}", state}
-    end
+  def format_response(%State{word: word} = _state) do
+      "Game Over, word was: #{word}"
+  end
 
 
   defp mask_word(%{matches: matches, word: word, mask: mask} = _state) do
